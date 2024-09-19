@@ -62,7 +62,7 @@ export const deleteById = async (req,res) => {
     try{        
         const isCart = await Cart.findOne({user:user});
         if(isCart){
-            if(isCart.products.include(product)){
+            if(isCart.products.includes(product)){
             isCart.products = isCart.products.filter(item => item !== product)
             const updatedCart = await isCart.save();
             res.status(200).json({message:"item removed successfully", cart:updatedCart})
